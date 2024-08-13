@@ -28,30 +28,15 @@ namespace UnitBrains.Player
 
             IncreaseTemperature();
 
-
             for (int i = 0; i < _temperature; i++)
             {
-
+                var projectile = CreateProjectile(forTarget);
+                AddProjectileToList(projectile, intoList);
 
             }
-            var projectile = CreateProjectile(forTarget);
-            AddProjectileToList(projectile, intoList);
             ///////////////////////////////////////
             
-           
-
-
-
-
         }
-
-        
-
-
-
-
-
-
 
         public override Vector2Int GetNextStep()
         {
