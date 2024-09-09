@@ -30,17 +30,17 @@ namespace UnitBrains.Player
 
         public override Vector2Int GetNextStep()
         {
-            if (targetsOutOfRange.Count > 0)     // Если есть цели вне достигаемости 
+            if (targetsOutOfRange.Count > 0)     
             {
                 Vector2Int currentTarget = targetsOutOfRange[0]; 
                
-                if (IsTargetInRange(currentTarget))                   // Проверяем, в пределах ли достигаемость (цель) 
+                if (IsTargetInRange(currentTarget))                   
                 {
-                    return unit.Pos;                                 // Если цель доступна,тогда возвращаем текущую позицию
+                    return unit.Pos;                                 
                 }
-                return unit.Pos.CalcNextStepTowards(currentTarget); // Если недоступна, двигаемся к цели
+                return unit.Pos.CalcNextStepTowards(currentTarget); 
             }
-            return unit.Pos;                                        // Если целей нет, возвращаем текущую позицию
+            return unit.Pos;                                       
         }
 
         protected override List<Vector2Int> SelectTargets()
