@@ -15,7 +15,6 @@ namespace UnitBrains.Player
         private float _temperature = 0f;
         private float _cooldownTime = 0f;
         private bool _overheated;
-
         private List<Vector2Int> targetsOutOfRange = new List<Vector2Int>();
 
         protected override void GenerateProjectiles(Vector2Int forTarget, List<BaseProjectile> intoList)
@@ -31,17 +30,17 @@ namespace UnitBrains.Player
 
         public override Vector2Int GetNextStep()
         {
-            if (targetsOutOfRange.Count > 0)
+            if (targetsOutOfRange.Count > 0)     
             {
-                Vector2Int currentTarget = targetsOutOfRange[0];
-
-                if (IsTargetInRange(currentTarget))
+                Vector2Int currentTarget = targetsOutOfRange[0]; 
+               
+                if (IsTargetInRange(currentTarget))                   
                 {
-                    return unit.Pos;
+                    return unit.Pos;                                 
                 }
-                return unit.Pos.CalcNextStepTowards(currentTarget);
+                return unit.Pos.CalcNextStepTowards(currentTarget); 
             }
-            return unit.Pos;
+            return unit.Pos;                                       
         }
 
         protected override List<Vector2Int> SelectTargets()
@@ -64,10 +63,13 @@ namespace UnitBrains.Player
                     }
                 }
 
-                targetsOutOfRange.Add(closestTarget);
                 if (IsTargetInRange(closestTarget))
                 {
                     result.Add(closestTarget);
+                }
+                else
+                {
+                    targetsOutOfRange.Add(closestTarget);
                 }
             }
             else
@@ -75,8 +77,14 @@ namespace UnitBrains.Player
                 int enemyPlayerId = IsPlayerUnitBrain ? RuntimeModel.BotPlayerId : RuntimeModel.PlayerId;
                 Vector2Int enemyBase = runtimeModel.RoMap.Bases[enemyPlayerId];
 
-                targetsOutOfRange.Add(enemyBase);
-                result.Add(enemyBase);
+                if (IsTargetInRange(enemyBase))
+                {
+                    result.Add(enemyBase);
+                }
+                else
+                {
+                    targetsOutOfRange.Add(enemyBase);
+                }
             }
 
             return result;
@@ -112,4 +120,3 @@ namespace UnitBrains.Player
         }
     }
 }
-
