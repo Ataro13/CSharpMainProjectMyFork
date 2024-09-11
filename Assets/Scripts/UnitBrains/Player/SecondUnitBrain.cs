@@ -14,6 +14,7 @@ namespace UnitBrains.Player
         private const int MaxTargets = 3;
         private const float OverheatTemperature = 3f;
         private const float OverheatCooldown = 2f;
+        private const float AttackRange = 3.0f; // Добавил радиус атаки
         private List<Vector2Int> Targets = new List<Vector2Int>();
         [SerializeField] private int UnitId = ++_unitCounter;
         private float _temperature = 0f;
@@ -22,6 +23,8 @@ namespace UnitBrains.Player
 
         protected override void GenerateProjectiles(Vector2Int forTarget, List<BaseProjectile> intoList)
         {
+            if (Vector2Int.Distance(unit.Pos, forTarget) > AttackRange) return; //  добавил проверку на радиус атаки
+
             float currentTemperature = GetTemperature();
             if (currentTemperature >= OverheatTemperature) return;
 
